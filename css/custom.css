@@ -1,0 +1,39 @@
+.mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab {
+    color: rgb(255,255,255);
+    background-color: rgb(102, 64, 255);
+    position: relative;
+    top:5px;
+}
+th{
+    text-align: right;
+}
+tr{
+    text-align: right;
+}
+#container-for-jsonexport {
+    width: 600px;
+    /* border: 1px solid grey;*/
+}
+th {
+    background-color: #eee;
+}
+th[data-sort]{
+    cursor:pointer;
+
+}
+th:hover{
+    border:solid 4px red;
+}
+tr.awesome{
+    color: red;
+}
+#skolekyssokere{
+    position: relative;
+    top:130px;
+    left: 5px;
+}
+.form-group{
+    position: relative;
+    top:130px;
+    left: 5px;
+}

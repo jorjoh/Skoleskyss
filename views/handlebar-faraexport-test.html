@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Skoleskyss søknader </title>
+        <link rel="stylesheet" href="/public/css/bootstrap.css">
+        <!-- Script og css biblioteker for løsnignen-->
+        <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="/public/css/custom.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src=/public/js/stupidtable.js></script>
+        <script src=/public/js/excellentexport.min.js></script>
+        <script src="/public/js/alasql.min.js"></script>
+        <!-- Slutt på script og css biblioteker for løsningen-->
+        <!--Setter UTF-8 standard-->
+        <meta charset="UTF-8">
+    </head>
+    <!--Header som inneholder logo og fargeprofil-->
+    <div id="header">
+        <img src="/public/material/Tfk_skjold_RGB_pos.png" style="width: 100px; height: 120px; float: left;">
+        <h1 style="width: 100%; left: 200px;">Skoleskyss søkere:</h1>
+    </div>
+    <!--Slutt på header-->
+    <body>
+
+    <div id="container-for-jsonexport" class="table-responsive">
+    </div>
+        <!--Tabell for som inneholder Skolekyss Søkere-->
+        <table id="skolekyssokere" class="mdl-data-table mdl-js-data-table mdl-data-table- mdl-shadow--2dp">
+            <thead>
+
+            <tr> <!--Itererer gjennom alle elementene i posisjon [0] som tilsvarer <th>-->
+                {{#each this.[0]}}
+                <th id="tablerow" data-sort="string" class="mdl-data-table__cell--non-numeric">{{@key}}</th>
+                {{/each}}
+            </tr>
+
+            </thead>
+            <tbody>
+            <!--Itererer gjennom alle vediene til students og skriver de ut i tabellen-->
+            {{#each this}}
+            <tr>
+                {{#each .}}
+                <td class="mdl-data-table__cell--non-numeric"> {{this}}</td>
+                {{/each}}
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
+    <!--Slutt på tabell-->
+
+    <!--Sorteringsfunksjonalitet for tabellen-->
+    <script>
+        $(function () {
+            $("table").stupidtable();
+        });
+    </script>
+
+    <!--Eksporterer tabellen til Excel-knapp-->
+    <div class="form-group">
+        <a href="http://desktop-ca3arsh:3001/excel" id="button"
+           class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Eksporter til Excel
+        </a>
+    </div>
+
+    <p style="position: relative; top: 130px; float: left;">Fra:</p>
+    <input type="date" value="{{moment date=d format='YYYY-MM-DD' subtract='days' amount='2'}}" style="position: relative; float: left; top: 130px;" /> <p></p>
+    <p style="position: relative; top: 130px; float:left;">Til:</p>
+    <input type="date" value="{{moment date=d format='YYYY-MM-DD'}}" style="position: relative; float: left; top: 130px;"/>
+
+
+
+    <p id="demo1" style=" width:50%; border: solid 1px black">Date is: {{moment d subtract="days" amount="2"}}</p>
+    <p id="demo2" style=" width:50%; border: solid 1px black">Unix {{moment d "unix" subtract="days" amount="1000"}}</p>
+    <p id="demo3" style=" width:50%; border: solid 1px black">DateCalander is: {{moment d "calendar"}}</p>
+
+    <script>
+
+        function correctDateFormat(standardDate) {
+            console.log(("Datoformatet er: " + standardDate))
+            console.log((new Date(standardDate).getTime() / 1000))
+        }
+
+           /**function correctDateFormat(standardDate){
+            alert("Datoformatet er: " + standardDate)
+            alert( new Date(standardDate).getTime() / 1000)
+         }**/
+    </script>
+
+    <!--Slutt på knappen-->
+    </body>
+
+    <!--Footer med logo og fargeprofil-->
+    <div id="footer">
+        <img src="/public/material/footerLogo.png" style="float: left; position: relative; top:20px; left: 10px;">
+    </div>
+    <!--Slutt på footer-->
+</html>
