@@ -2,17 +2,22 @@
 
 // var config = require('../config')
 var Wreck = require('wreck')
-var Handlebars = require("handlebars")
-var MomentHandler = require("handlebars.moment")
+var Handlebars = require('handlebars')
+var MomentHandler = require('handlebars.moment')
+var Moment = require('moment')
 MomentHandler.registerHelpers(Handlebars)
 
-//Get current date 
-/**var utc = new Date().toJSON().slice(0,10);**/
-
-//End of get current date
-
-
 console.log('Start')
+
+var now = Moment()
+var day1 = Moment.unix(1318781876);
+var day2 = Moment.unix(1318781876);
+var twodaysago = Moment().subtract(2, 'days');
+
+
+console.log('---------------------------')
+console.log('{{moment d "unix" subtract="days" amount="1000"}}')
+console.log('---------------------------')
 
 function getPublicResponse (request, reply) {
   var message = {
@@ -25,7 +30,7 @@ function getPublicResponse (request, reply) {
 function exportTableToExcel(request, reply) {
 
   var urlpost = 'http://localhost:3000/'
-  console.log("test-buttom-exportTableToExcel")
+ // console.log("test-buttom-exportTableToExcel")
   var options = {
     payload: JSON.stringify({'data': request.yar.get('sokerdata')}),
     json: true
@@ -64,7 +69,8 @@ function getselectedtimeperiod (request, reply) {
   var wreckOptions = {
     json: true
   }
-  var url = 'https://api.skoleskyss.t-fk.no/applications';
+  var url = 'https://api.skoleskyss.t-fk.no/applications/from/'+day1+'/to/'+day2;
+  console.log(url)
 
   Wreck.get(url, wreckOptions, function (err, data, payload) {
     request.yar.set({'sokerdata': payload})
