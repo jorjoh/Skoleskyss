@@ -65,23 +65,22 @@
             Eksporter til Excel
         </a>
     </div>
-    <div class="form-group">
-        <a href="http://desktop-ca3arsh:3001/tableselected" id="selectedtimepriod"
-           class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Hent valgt periode
-        </a>
-    </div>
+
 
     <h3>Velg tidsrom</h3>
+    <form method="get" action="/tableselected">
     <p style="position: relative; top: 130px; float: left;">Fra:</p>
-    <input type="date" value="{{moment date=d format='YYYY-MM-DD' subtract='days' amount='2'}}" style="position: relative; float: left; top: 130px;" /> <p></p>
+    <input type="date" name="from" value="{{moment date=d format='YYYY-MM-DD' subtract='days' amount='10'}}" style="position: relative; float: left; top: 130px;" /> <p></p>
     <p style="position: relative; top: 130px; float:left;">Til:</p>
-    <input type="date" value="{{moment date=d format='YYYY-MM-DD'}}" style="position: relative; float: left; top: 130px;"/>
-
-
-    <p id="datetime"></p>
-
+    <input type="date" name="to" value="{{moment date=d format='YYYY-MM-DD'}}" style="position: relative; float: left; top: 130px;"/>
+        <div class="form-group">
+            <!--<input type="text" value="hello" name="test"/>-->
+        <input type="submit" value="Hent valgt periode">
+        </div>
+    </form>
     <br>
+
+
 
     <!--<p id="demo1" style=" width:50%; border: solid 1px black">Date is: {{moment d subtract="days" amount="2"}}</p>-->
     <!--<p id="demo2" style=" width:50%; border: solid 1px black">Unix {{moment d "unix" subtract="days" amount="1000"}}</p>-->

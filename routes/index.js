@@ -1,6 +1,7 @@
 'use strict'
 
 var handlers = require('../handlers')
+var Joi = require('joi')
 
 var routes = [
   {
@@ -8,15 +9,22 @@ var routes = [
     path: '/table',
     config: {
       auth: false,
-      handler: handlers.givetablefood,
+      handler: handlers.getapplications,
       description: 'Show the frontpage with tableinformation'
     }
-  }, 
+  },
   {
     method: 'GET',
     path: '/tableselected',
     config: {
       auth: false,
+      validate: {
+        query: 
+        {
+          from: Joi.string(),
+          to: Joi.string()
+        }
+      },
       handler: handlers.getselectedtimeperiod,
       description: 'Show the frontpage with tableinformation'
     }
@@ -27,9 +35,10 @@ var routes = [
     config: {
       auth: false,
       handler: handlers.exportTableToExcel,
-      description: 'Send table to xlsx-converter'
+      description: 'Send table to XLSX-converter'
     }
   }
 ]
+
 
 module.exports = routes
