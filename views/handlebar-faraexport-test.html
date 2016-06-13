@@ -3,7 +3,7 @@
     <head>
         <title>Skoleskyss søknader </title>
         <link rel="stylesheet" href="/public/css/bootstrap.css">
-        <!-- Script og css biblioteker for løsnignen-->
+        <!-- Script og css biblioteker for løsningen-->
         <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
@@ -65,20 +65,26 @@
             Eksporter til Excel
         </a>
     </div>
-
-
-    <h3>Velg tidsrom</h3>
-    <form method="get" action="/tableselected">
-    <p style="position: relative; top: 130px; float: left;">Fra:</p>
-    <input type="date" name="from" value="{{moment date=d format='YYYY-MM-DD' subtract='days' amount='10'}}" style="position: relative; float: left; top: 130px;" /> <p></p>
-    <p style="position: relative; top: 130px; float:left;">Til:</p>
-    <input type="date" name="to" value="{{moment date=d format='YYYY-MM-DD'}}" style="position: relative; float: left; top: 130px;"/>
-        <div class="form-group">
-            <!--<input type="text" value="hello" name="test"/>-->
-        <input type="submit" value="Hent valgt periode">
-        </div>
-    </form>
+    <!-- Slutt på Excel-knapp -->
     <br>
+
+
+    <!--Panel for valgt periode-->
+    <div id="velgPeriode" style="position:relative; left: 5px; border: solid rebeccapurple 1px; width: 300px;">
+    <h3>Velg tidsrom:</h3>
+    <form method="get" action="/tableselected">
+    <label for="from" style="position:relative; float: left;">Fra:</label>
+    <input type="date" id="from" name="from" value="{{moment date=d format='YYYY-MM-DD' subtract='days' amount='10'}}" style="float: left; top: 130px;" />
+    <br><br><label for="to" style="top: 130px; float:left;">Til:</label>
+    <input type="date" id="to" name="to" value="{{moment date=d format='YYYY-MM-DD'}}" style=" position:relative; float: left;"/><br><br>
+    <!--Velg tidsavgrenset periode knapp-->
+    <input type="submit" value="Hent valgt periode" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="position:relative; top: 10px;">
+
+        <!--Slutt på knapp-->
+    </form>
+    <!--Slutt på valgt periode-->
+    <br>
+    </div>
 
 
 
@@ -97,13 +103,11 @@
             console.log(("Datoformatet er: " + standardDate))
             console.log((new Date(standardDate).getTime() / 1000))
         }
-
            /**function correctDateFormat(standardDate){
             alert("Datoformatet er: " + standardDate)
             alert( new Date(standardDate).getTime() / 1000)
          }**/
     </script>
-
     <!--Slutt på knappen-->
     </body>
 

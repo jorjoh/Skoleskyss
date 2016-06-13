@@ -1,6 +1,6 @@
 'use strict'
 
-// var config = require('../config')
+
 var Wreck = require('wreck')
 var Handlebars = require('handlebars')
 var MomentHandler = require('handlebars.moment')
@@ -14,25 +14,20 @@ var day1 = Moment.unix(1318781876);
 var day2 = Moment.unix(1318781876);
 var twodaysago = Moment().subtract(2, 'days');
 
+console.log(now)
 
-
-// console.log('---------------------------')
-// console.log('{{moment d "unix" subtract="days" amount="1000"}}')
-// console.log('---------------------------')
-
-
-function getPublicResponse (request, reply) {
+function getPublicResponse(request, reply) {
   var message = {
     message: '(Nothing but) Flowers'
-    
+
   }
-  reply.view('handlebar-faraexport-test',message)
+  reply.view('handlebar-faraexport-test', message)
 }
 
 function exportTableToExcel(request, reply) {
 
   var urlpost = 'http://localhost:3000/'
- // console.log("test-buttom-exportTableToExcel")
+  // console.log("test-buttom-exportTableToExcel")
   var options = {
     payload: JSON.stringify({'data': request.yar.get('sokerdata')}),
     json: true
@@ -46,13 +41,13 @@ function exportTableToExcel(request, reply) {
       reply(err)
     } else {
       //console.log(payload)
-      reply(payload).header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet').header('Content-Disposition', 'attachment; filename=Tekst.xlsx')
+      reply(payload).header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet').header('Content-Disposition', 'attachment; filename=' + now + '.xlsx')
       //reply(payload)
     }
   })
 }
 
-function getapplications (request, reply) {
+function getapplications(request, reply) {
   var wreckOptions = {
     json: true
   }
@@ -60,20 +55,17 @@ function getapplications (request, reply) {
 
   Wreck.get(url, wreckOptions, function (err, data, payload) {
     request.yar.set({'sokerdata': payload})
-    //console.log(payload)
     reply.view('handlebar-faraexport-test', payload)
-    //reply(payload)
   })
-  
+
 }
 
-function getselectedtimeperiod (request, reply) {
-  //console.log(Moment(request.query.to).unix())
+function getselectedtimeperiod(request, reply) {
   var wreckOptions = {
     json: true
   }
 
-  var url = 'https://api.skoleskyss.t-fk.no/applications/'+Moment(request.query.from).unix()+'/'+Moment(request.query.to).unix();
+  var url = 'https://api.skoleskyss.t-fk.no/applications/' + Moment(request.query.from).unix() + '/' + Moment(request.query.to).unix();
   console.log('--------URL--------')
   console.log(url)
   console.log('-------------------')
@@ -89,7 +81,7 @@ function getselectedtimeperiod (request, reply) {
     reply.view('handlebar-faraexport-test', payload)
     //reply(payload)
   })
-
+  
 }
 
 module.exports.getPublicResponse = getPublicResponse
